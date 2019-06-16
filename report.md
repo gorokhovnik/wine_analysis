@@ -15,7 +15,7 @@
 - province - провинция/штат производства
 - winery - винодельня
 - designation - винограник
-- variety - тип вина
+- variety - тип винограда
 - title - название вина
 - description - описание вина
 - points - оценка вина экспертами
