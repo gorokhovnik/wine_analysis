@@ -1492,10 +1492,7 @@ def FE(wine):
     wine['continent'] = np.where(wine['country'].str.contains('|'.join(europe)), 'europe',
                                  np.where(wine['country'].str.contains('|'.join(asia)), 'asia',
                                           np.where(wine['country'].str.contains('|'.join(africa)), 'africa',
-                                                   np.where(wine['country'].str.contains('|'.join(north_america)),
-                                                            'north america',
-                                                            np.where(
-                                                                wine['country'].str.contains('|'.join(south_america)),
-                                                                'south america', 'oceania')))))
+                                                   np.where(wine['country'].str.contains('|'.join(north_america)), 'north america',
+                                                            np.where(wine['country'].str.contains('|'.join(south_america)), 'south america', 'oceania')))))
     wine['color'] = np.where(wine['variety'].str.contains('|'.join(rose)), 'rose',
                              np.where(wine['variety'].str.contains('|'.join(red)), 'red', 'white'))
