@@ -242,7 +242,7 @@ countries = [
                    'America/North_Dakota/New_Salem', 'America/Denver', 'America/Boise', 'America/Shiprock',
                    'America/Phoenix', 'America/Los_Angeles', 'America/Anchorage', 'America/Juneau', 'America/Yakutat',
                    'America/Nome', 'America/Adak', 'Pacific/Honolulu'], 'code': 'US', 'continent': 'North America',
-     'name': 'United States', 'capital': 'Washington, D.C.'},
+     'name': 'US', 'capital': 'Washington, D.C.'},
     {'timezones': ['America/Montevideo'], 'code': 'UY', 'continent': 'South America', 'name': 'Uruguay',
      'capital': 'Montevideo'},
     {'timezones': ['Asia/Samarkand', 'Asia/Tashkent'], 'code': 'UZ', 'continent': 'Asia', 'name': 'Uzbekistan',
