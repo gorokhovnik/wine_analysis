@@ -11,8 +11,8 @@ warnings.filterwarnings('ignore')
 
 wine = pd.read_csv('wine.csv')
 
-RS(wine)
-FE(wine)
+wine = RS(wine)
+wine = FE(wine)
 
 cols = list(wine.columns)
 print(cols)
@@ -50,3 +50,5 @@ for color in ['red', 'white']:
 wine_summary['norm_points_to_price'] = wine['points_to_price']
 
 print('\n')
+
+

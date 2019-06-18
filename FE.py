@@ -1500,3 +1500,4 @@ def FE(wine):
                                 np.where(wine['price'] <= 30, 2,
                                          np.where(wine['price'] <= 50, 3, 4)))
     print('dim after feature engineering:', wine.shape)
+    return wine
