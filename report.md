@@ -7,7 +7,7 @@
 
 2\. Выбор данных
 ----------------
-![missing](report_img/missing.png)
+![](report_img/missing.png)
 
 Из выборки исключены строки не содержащие
 - цену
@@ -34,7 +34,28 @@
 - year - год производства (извлечен из названия)
 - continent - континент производства (извлечен из стран, список стран и континентов взят из https://gist.github.com/pamelafox/986163, подправлен вручную)
 - color - цвет вина (извлечен из винограда производства, список взят из https://en.wikipedia.org/wiki/List_of_grape_varieties)
+- category - ценовая категория вина (из цены: <=15$ - 1, <=30$ - 2, <=50$ - 3, <=100$ - 4)
 
 5\. Взгляд на данные
 --------------------
 - country - страна производства
+
+6\. Сегментация
+---------------
+Вина разбиты на четыре категории, а также в данном датасете на два цвета: красное и белое
+
+В каждом сегменте предполагается выбрать лучшее вино
+
+|||||
+|---|---|---|---|
+|<=15$ белое|<=30$ белое|<=50$ белое|<=100$ белое|
+|<=15$ красное|<=30$ красное|<=50$ красное|<=100$ красное|
+
+7\. Анализ без применения ML
+----------------------------
+Лучшие вина по отношению оценка / цена
+
+|||||
+|---|---|---|---|
+|Cramele Recas 2011 UnWineD Pinot Grigio (Viile Timisului) 4.0$ 86p|David Hill 2010 Estate Pinot Gris (Willamette Valley) 16.0$ 93p|Windemere 2013 MacGregor Vineyard Pinot Noir (Edna Valley) 31.0$ 94p|Joseph Swan Vineyards 2007 Trenton Estate Vineyard Pinot Noir (Russian River Valley) 52.0$ 97p|
+|Pam's Cuties NV Unoaked Chardonnay (California) 4.0$ 83p|Uvaggio 2010 Secco Moscato Giallo (Lodi) 16.0$ 94p|Pieropan 2011 La Rocca  (Soave Classico) 31.0$ 95p|Salomon-Undhof 2015 Steiner Kögl Reserve Riesling (Kremstal) 51.0$ 95p|

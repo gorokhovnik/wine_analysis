@@ -1496,3 +1496,6 @@ def FE(wine):
                                                             np.where(wine['country'].str.contains('|'.join(south_america)), 'south america', 'oceania')))))
     wine['color'] = np.where(wine['variety'].str.contains('|'.join(rose)), 'rose',
                              np.where(wine['variety'].str.contains('|'.join(red)), 'red', 'white'))
+    wine['category'] = np.where(wine['price'] <= 15, 1,
+                                np.where(wine['price'] <= 30, 2,
+                                         np.where(wine['price'] <= 50, 3, 4)))

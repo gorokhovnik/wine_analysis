@@ -6,7 +6,7 @@ import seaborn as sns
 from FE import FE
 from RS import RS
 
-wine = pd.read_csv('../wine.csv')
+wine = pd.read_csv('wine.csv')
 
 RS(wine)
 FE(wine)
@@ -15,5 +15,5 @@ cols = list(wine.columns)
 
 print(cols)
 
-plt.pie(wine['country'])
+sns.jointplot(x='price', y='category', data=wine, kind="kde")
 plt.show()
