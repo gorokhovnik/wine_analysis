@@ -11,6 +11,9 @@ wine = pd.read_csv('../wine.csv')
 RS(wine)
 FE(wine)
 
-cols = wine.columns
+cols = list(wine.columns)
 
 print(cols)
+
+plt.pie(wine['country'])
+plt.show()
