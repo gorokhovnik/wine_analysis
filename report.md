@@ -53,9 +53,23 @@
 
 7\. Анализ без применения ML
 ----------------------------
-Лучшие вина по отношению оценка / цена
+Лучшие вина:
+
+|||||
+|---|---|---|---|
+|Château Vincens 2011 Prestige Malbec-Merlot (Cahors) 13.0$ 93p|Donkey & Goat 2012 Grenache Noir Grenache (El Dorado) 27.0$ 96p|Pirouette 2008 Red Wine Red (Columbia Valley (WA)) 50.0$ 98p|Avignonesi 1995 Occhio di Pernice  (Vin Santo di Montepulciano) 210.0$ 100p|
+|Osborne NV Pedro Ximenez 1827 Sweet Sherry Sherry (Jerez) 14.0$ 94p|Domaines Schlumberger 2014 Saering Grand Cru Riesling (Alsace) 29.0$ 96p|Failla 2010 Estate Vineyard Chardonnay (Sonoma Coast) 44.0$ 99p|Chambers Rosewood Vineyards NV Rare Muscat (Rutherglen) 350.0$ 100p|
+
+Лучшие вина по отношению оценка / цена:
 
 |||||
 |---|---|---|---|
 |Cramele Recas 2011 UnWineD Pinot Grigio (Viile Timisului) 4.0$ 86p|David Hill 2010 Estate Pinot Gris (Willamette Valley) 16.0$ 93p|Windemere 2013 MacGregor Vineyard Pinot Noir (Edna Valley) 31.0$ 94p|Joseph Swan Vineyards 2007 Trenton Estate Vineyard Pinot Noir (Russian River Valley) 52.0$ 97p|
 |Pam's Cuties NV Unoaked Chardonnay (California) 4.0$ 83p|Uvaggio 2010 Secco Moscato Giallo (Lodi) 16.0$ 94p|Pieropan 2011 La Rocca  (Soave Classico) 31.0$ 95p|Salomon-Undhof 2015 Steiner Kögl Reserve Riesling (Kremstal) 51.0$ 95p|
+
+Лучшие цены при изменении оценки по формуле new_points = (points – E(points))**3:
+
+|||||
+|---|---|---|---|
+|Château d'Aydie 2010 Aydie l'Origine Tannat-Cabernet Franc (Madiran) 12.0$ 93p|Donkey & Goat 2012 Grenache Noir Grenache (El Dorado) 27.0$ 96p|Donkey & Goat 2010 Fenaughty Vineyard Syrah (El Dorado) 35.0$ 97p|Charles Smith 2006 Royal City Syrah (Columbia Valley (WA)) 80.0$ 100p|
+|Quinta dos Murças 2011 Assobio Red (Douro) 13.0$ 94p|The Eyrie Vineyards 2014 Estate Chardonnay (Dundee Hills) 27.0$ 96p|Failla 2010 Estate Vineyard Chardonnay (Sonoma Coast) 44.0$ 99p|Wayfarer 2014 Wayfarer Vineyard Chardonnay (Fort Ross-Seaview) 80.0$ 98p|
