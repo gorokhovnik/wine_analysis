@@ -1486,7 +1486,7 @@ rose = ['Agdam Gyzyl Uzumu', 'Agdam gyzyl izyum', 'Agdam gyzyl uzumu', 'Agdam qi
         'Pink Chablis', 'Rielsing Rose']
 
 
-def FE(wine):
+def FE(wine, country_cutoff=1000):
     wine.set_index('id', inplace=True)
     wine['year'] = wine['title'].str.extract(r'([1-9][0-9][0-9][0-9])')
     wine['continent'] = np.where(wine['country'].str.contains('|'.join(europe)), 'europe',
@@ -1494,6 +1494,9 @@ def FE(wine):
                                           np.where(wine['country'].str.contains('|'.join(africa)), 'africa',
                                                    np.where(wine['country'].str.contains('|'.join(north_america)), 'north america',
                                                             np.where(wine['country'].str.contains('|'.join(south_america)), 'south america', 'oceania')))))
+    countries = wine[['country', 'title']].groupby('country').count()
+    popular_countries = countries[countries['title'] > country_cutoff].index.tolist()
+    wine['country'] = np.where(wine['country'].str.contains('|'.join(popular_countries)), wine['country'], 'Other')
     wine['color'] = np.where(wine['variety'].str.contains('|'.join(rose)), 'rose',
                              np.where(wine['variety'].str.contains('|'.join(red)), 'red', 'white'))
     wine['category'] = np.where(wine['price'] <= 15, 1,

@@ -12,7 +12,7 @@ warnings.filterwarnings('ignore')
 wine = pd.read_csv('wine.csv')
 
 wine = RS(wine)
-wine = FE(wine)
+wine = FE(wine, 500)
 
 cols = list(wine.columns)
 print(cols)
@@ -26,6 +26,7 @@ for color in ['red', 'white']:
         idx = wine[(wine['category'] == category) & (wine['color'] == color)]['points'].argmax()
         print('|' + wine.loc[idx]['title'] + ' ' + str(wine.loc[idx]['price']) + '$ ' + str(wine.loc[idx]['points']) + 'p', end='')
     print('|')
+print()
 wine_summary = wine[['title', 'price', 'points']]
 
 
@@ -37,6 +38,7 @@ for color in ['red', 'white']:
         idx = wine[(wine['category'] == category) & (wine['color'] == color)]['points_to_price'].argmax()
         print('|' + wine.loc[idx]['title'] + ' ' + str(wine.loc[idx]['price']) + '$ ' + str(wine.loc[idx]['points']) + 'p', end='')
     print('|')
+print()
 wine_summary['points_to_price'] = wine['points_to_price']
 
 print('Лучшие цены при изменении оценки по формуле new_points = (points – E(points))**3:\n')
@@ -48,7 +50,7 @@ for color in ['red', 'white']:
         print('|' + wine.loc[idx]['title'] + ' ' + str(wine.loc[idx]['price']) + '$ ' + str(wine.loc[idx]['points']) + 'p', end='')
     print('|')
 wine_summary['norm_points_to_price'] = wine['points_to_price']
-
 print('\n')
 
-
+'''лучшие страны'''
+countries = wine.groupby('country').mean()
