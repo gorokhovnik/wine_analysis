@@ -49,22 +49,29 @@ print()
 # plt.pie(continents_count, labels=continents)
 # plt.savefig('report_img/continents_pie.png')
 # plt.show()
+#
+# '''цвет'''
+# print('- color - цвет вина\n\n![](report_img/color_bar.png)\n')
+# colors = wine[['color', 'title']].groupby('color').count()
+# colors_count = colors['title'].tolist()
+# colors = colors.index.tolist()
+# print('|Color|Count|\n|---|---|')
+# for idx, color in enumerate(colors):
+#     print('|' + color + '|' + str(colors_count[idx]) + '|')
+# print('\nПри примерно одинаковой средней оценке белые вина заметно дешевле красных, поэтому будет целесообразно рассматривать вина по-отдельности\n')
+#
+# ax = wine[['color', 'title']].groupby('color').count().plot(kind='bar', color='black')
+# wine[['color', 'points', 'price']].groupby('color').mean().plot(secondary_y=True, xlim=ax.get_xlim(), ax=ax, color=['red', 'blue'], linewidth=2, markersize=10)
+# ax.legend().remove()
+# plt.legend(loc='center')
+# plt.savefig('report_img/color_bar.png')
+# plt.show()
 
-'''цвет'''
-print('- color - цвет вина\n\n![](report_img/color_bar.png)\n')
-colors = wine[['color', 'title']].groupby('color').count()
-colors_count = colors['title'].tolist()
-colors = colors.index.tolist()
-print('|Color|Count|\n|---|---|')
-for idx, color in enumerate(colors):
-    print('|' + color + '|' + str(colors_count[idx]) + '|')
-print('\nПри примерно одинаковой средней оценке белые вина заметно дешевле красных, поэтому будет целесообразно рассматривать вина по-отдельности\n')
 
-ax = wine[['color', 'title']].groupby('color').count().plot(kind='bar', color='black')
-wine[['color', 'points', 'price']].groupby('color').mean().plot(secondary_y=True, xlim=ax.get_xlim(), ax=ax, color=['red', 'blue'], linewidth=2, markersize=10)
-ax.legend().remove()
-plt.legend(loc='center')
-plt.savefig('report_img/color_bar.png')
+'''оценка'''
+print('- points - цвет вина\n\nРаспределение оценок:\n\n![](report_img/points_hist.png)\n')
+print('Распределение похоже на нормальное со средним значением около 90. Поскольку распределение не равномерное, имеет смысл создать нелинейную функцию от points, чтобы она сильнее награждала / наказывала за отдаление от EX, что и будет сделано далее\n')
+
+sns.distplot(wine['points'], 20, True, False)
+plt.savefig('report_img/points_hist.png')
 plt.show()
-print(colors)
-
