@@ -69,9 +69,28 @@ print()
 
 
 '''оценка'''
-print('- points - цвет вина\n\nРаспределение оценок:\n\n![](report_img/points_hist.png)\n')
+print('- points - оценка вина экспертами\n\nРаспределение оценок:\n\n![](report_img/points_hist.png)\n')
 print('Распределение похоже на нормальное со средним значением около 90. Поскольку распределение не равномерное, имеет смысл создать нелинейную функцию от points, чтобы она сильнее награждала / наказывала за отдаление от EX, что и будет сделано далее\n')
 
 sns.distplot(wine['points'], 20, True, False)
 plt.savefig('report_img/points_hist.png')
+plt.show()
+
+
+'''цена'''
+print('- price - цена вина\n\nРаспределение цены:\n\n![](report_img/price_hist.png)\n')
+print('Распределение имеет заметный скос, поэтому разбиение на категории произойдет с расширением окна\n')
+
+sns.distplot(wine['price'], 20)
+plt.savefig('report_img/price_hist.png')
+plt.show()
+
+
+'''оценка и цена'''
+print('- совместное распределение цены и оценки\n\n![](report_img/points_price_join.png)\n')
+print('Как видно, присутствует положительная корреляция между ценой и оценкой экспертов, тем не менее\n')
+
+
+sns.jointplot('price', 'points', wine, 'kde')
+plt.savefig('report_img/points_price_join.png')
 plt.show()
