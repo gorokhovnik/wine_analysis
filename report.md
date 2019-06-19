@@ -101,7 +101,7 @@
 
 ![](report_img/points_price_join.png)
 
-Как видно, присутствует положительная корреляция между ценой и оценкой экспертов, тем не менее
+Как видно, присутствует положительная корреляция между ценой и оценкой экспертов, тем не менее пятно широкое, то есть имеются экземпляры, качество которых заметно выше среднего по цене (в дальнейшем категории)
 
 6\. Сегментация
 ---------------
@@ -130,9 +130,44 @@
 |Cramele Recas 2011 UnWineD Pinot Grigio (Viile Timisului) 4.0$ 86p|David Hill 2010 Estate Pinot Gris (Willamette Valley) 16.0$ 93p|Windemere 2013 MacGregor Vineyard Pinot Noir (Edna Valley) 31.0$ 94p|Joseph Swan Vineyards 2007 Trenton Estate Vineyard Pinot Noir (Russian River Valley) 52.0$ 97p|
 |Pam's Cuties NV Unoaked Chardonnay (California) 4.0$ 83p|Uvaggio 2010 Secco Moscato Giallo (Lodi) 16.0$ 94p|Pieropan 2011 La Rocca  (Soave Classico) 31.0$ 95p|Salomon-Undhof 2015 Steiner Kögl Reserve Riesling (Kremstal) 51.0$ 95p|
 
-Лучшие цены при изменении оценки по формуле new_points = (points – E(points))**3:
+Лучшие цены при изменении оценки по формуле new_points = (points – 80)**2:
 
 |||||
 |---|---|---|---|
-|Château d'Aydie 2010 Aydie l'Origine Tannat-Cabernet Franc (Madiran) 12.0$ 93p|Donkey & Goat 2012 Grenache Noir Grenache (El Dorado) 27.0$ 96p|Donkey & Goat 2010 Fenaughty Vineyard Syrah (El Dorado) 35.0$ 97p|Charles Smith 2006 Royal City Syrah (Columbia Valley (WA)) 80.0$ 100p|
-|Quinta dos Murças 2011 Assobio Red (Douro) 13.0$ 94p|The Eyrie Vineyards 2014 Estate Chardonnay (Dundee Hills) 27.0$ 96p|Failla 2010 Estate Vineyard Chardonnay (Sonoma Coast) 44.0$ 99p|Wayfarer 2014 Wayfarer Vineyard Chardonnay (Fort Ross-Seaview) 80.0$ 98p|
+|Château d'Aydie 2010 Aydie l'Origine Tannat-Cabernet Franc (Madiran) 12.0$ 93p|Michael David 2012 Petite Petit Petite Sirah (Lodi) 18.0$ 94p|Donkey & Goat 2010 Fenaughty Vineyard Syrah (El Dorado) 35.0$ 97p|Gramercy 2010 Lagniappe Syrah (Columbia Valley (WA)) 55.0$ 98p|
+|Herdade dos Machados 2012 Toutalga Red (Alentejano) 7.0$ 91p|Uvaggio 2010 Secco Moscato Giallo (Lodi) 16.0$ 94p|Failla 2010 Estate Vineyard Chardonnay (Sonoma Coast) 44.0$ 99p|Karl Erbes 2006 Ürziger Würzgarten Auslese * * * Goldkap Riesling (Mosel-Saar-Ruwer) 53.0$ 96p|
+
+8\. Построение предиктивных моделей (анализ с применением ML):
+------------------------------------
+Будут построены модели, задача которых будет предсказать параметры вина по описанию и другим его параметрам. Основной задачей будет изучение выбросов: вин, на которых алгоритм будет давать самые неточные предсказания. При хорошей точности модели, отличающиеся от предсказаний значения могут быть расценены, как особенные. Такие значения должны быть отмечены, посредством моделирования возможно будут найдены переоцененные и недооцененные вина.
+
+Также новые модели, разумеется, можно будет использовать для классификации новых (отсутствующих в обучающей выборке) вин
+
+Модели:
+
+- Предсказание цвета вина по описанию
+
+- Предсказание цвета вина по стране, континенту, цене, категории, году производства
+
+- Предсказание цвета вина по описанию, стране, континенту, цене, категории, году производства (совмещение двух предыдущих моделей и построение отдельной)
+
+
+- Предсказание категории по описанию
+
+- Предсказание категории по стране, континенту, цвету, году производства
+
+- Предсказание категории по описанию, стране, континенту, цвету, году производства (совмещение двух предыдущих моделей и построение отдельной)
+
+
+- Предсказание цены по описанию
+
+- Предсказание цены по стране, континенту, цвету, году производства
+
+- Предсказание цены по описанию, стране, континенту, цвету, году производства (совмещение двух предыдущих моделей и построение отдельной)
+
+
+- Предсказание оценки по описанию
+
+- Предсказание оценки вина по стране, континенту, цвету, цене, категории, году производства
+
+- Предсказание оценки вина по описанию, стране, континенту, цвету, цене, категории, году производства (совмещение двух предыдущих моделей и построение отдельной)

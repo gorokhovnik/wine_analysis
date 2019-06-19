@@ -10,7 +10,6 @@ raw_red = pd.read_csv('red.csv')
 raw_white = pd.read_csv('white.csv')
 raw_rose = pd.read_csv('rose.csv')
 
-
 for idx, row in raw_red.iterrows():
     red += row['Common Name(s)'].split('/')
     if not pd.isna(row['All Synonyms']):
@@ -55,7 +54,6 @@ for idx, word in enumerate(rose):
         rose[idx] = rose[idx][:-1]
 
 rose.sort()
-
 
 print('red =', red)
 print('white =', white)

@@ -313,7 +313,7 @@ north_america = countries.sort_values('name')[countries['continent'] == 'North A
 oceania = countries.sort_values('name')[countries['continent'] == 'Oceania']['name'].values.tolist()
 south_america = countries.sort_values('name')[countries['continent'] == 'South America']['name'].values.tolist()
 
-print('africa =',africa)
+print('africa =', africa)
 print('asia =', asia)
 print('europe =', europe)
 print('north_america =', north_america)
