@@ -28,7 +28,14 @@ X_train_f = X_train[['country', 'continent', 'price', 'category', 'year']]
 X_test_d = X_test['description'].str.lower().replace('[^a-zA-Z0-9%]', ' ', regex=True).replace('  ', ' ', regex=True)
 X_test_f = X_test[['country', 'continent', 'price', 'category', 'year']]
 
-tfidf = TfidfVectorizer(max_features=10000,)
+tfidf = TfidfVectorizer(min_df=20)
 X_train_d = tfidf.fit_transform(X_train_d)
 X_test_d = tfidf.transform(X_test_d)
 
+model = Perceptron()
+model.fit(X_train_d, y_train)
+p_train = model.predict(X_train_d)
+p_test = model.predict(X_test_d)
+
+print('accuracy:', accuracy_score(y_train, p_train), accuracy_score(y_test, p_test))
+print('roc_auc:', roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test))
