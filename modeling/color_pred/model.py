@@ -28,14 +28,28 @@ X_train_f = X_train[['country', 'continent', 'price', 'category', 'year']]
 X_test_d = X_test['description'].str.lower().replace('[^a-zA-Z0-9%]', ' ', regex=True).replace('  ', ' ', regex=True)
 X_test_f = X_test[['country', 'continent', 'price', 'category', 'year']]
 
+accuracy = []
+roc_auc = []
+
 tfidf = TfidfVectorizer(min_df=20)
 X_train_d = tfidf.fit_transform(X_train_d)
 X_test_d = tfidf.transform(X_test_d)
 
-model = Perceptron()
-model.fit(X_train_d, y_train)
-p_train = model.predict(X_train_d)
-p_test = model.predict(X_test_d)
+model_perceptron = Perceptron()
+model_perceptron.fit(X_train_d, y_train)
+p_train = model_perceptron.predict(X_train_d)
+p_test = model_perceptron.predict(X_test_d)
 
-print('accuracy:', accuracy_score(y_train, p_train), accuracy_score(y_test, p_test))
-print('roc_auc:', roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test))
+accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
+roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
+
+model_forest = RandomForestClassifier(100)
+model_forest.fit(X_train_d, y_train)
+p_train = model_forest.predict(X_train_d)
+p_test = model_forest.predict(X_test_d)
+
+accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
+roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
+
+print(accuracy)
+print(roc_auc)
