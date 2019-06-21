@@ -47,27 +47,27 @@ roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
 print(accuracy)
 print(roc_auc)
 
-model_forest = RandomForestClassifier(100)
-model_forest.fit(X_train_d, y_train)
-p_train = model_forest.predict(X_train_d)
-p_test = model_forest.predict(X_test_d)
+# model_forest = RandomForestClassifier(100)
+# model_forest.fit(X_train_d, y_train)
+# p_train = model_forest.predict(X_train_d)
+# p_test = model_forest.predict(X_test_d)
+#
+# accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
+# roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
+#
+# print(accuracy)
+# print(roc_auc)
 
-accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
-roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
+# model_bayes = GaussianNB()
+# model_bayes.fit(X_train_d, y_train)
+# p_train = model_bayes.predict(X_train_d)
+# p_test = model_bayes.predict(X_test_d)
+#
+# accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
+# roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
 
-print(accuracy)
-print(roc_auc)
-
-model_bayes = GaussianNB()
-model_bayes.fit(X_train_d, y_train)
-p_train = model_bayes.predict(X_train_d)
-p_test = model_bayes.predict(X_test_d)
-
-accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
-roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
-
-print(accuracy)
-print(roc_auc)
+# print(accuracy)
+# print(roc_auc)
 
 params = {
     'boost_from_average': 'false',
@@ -86,10 +86,10 @@ params = {
 
 to_train = lgb.Dataset(X_train_d, y_train)
 to_val = lgb.Dataset(X_test_d, y_test)
-model_lgb = lgb.train(params, to_train, valid_sets=[to_train, to_val], num_boost_round=1000000, verbose_eval=5000,
+model_lgb = lgb.train(params, to_train, valid_sets=[to_train, to_val], num_boost_round=1000000, verbose_eval=100,
                   early_stopping_rounds=2000)
-p_train = model_bayes.predict(X_train_d)
-p_test = model_bayes.predict(X_test_d)
+p_train = model_lgb.predict(X_train_d)
+p_test = model_lgb.predict(X_test_d)
 
 accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
 roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
