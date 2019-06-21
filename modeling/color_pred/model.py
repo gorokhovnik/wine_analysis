@@ -4,6 +4,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Perceptron
 from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 import lightgbm as lgb
 from sklearn.metrics import roc_auc_score, accuracy_score
@@ -43,10 +44,52 @@ p_test = model_perceptron.predict(X_test_d)
 accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
 roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
 
+print(accuracy)
+print(roc_auc)
+
 model_forest = RandomForestClassifier(100)
 model_forest.fit(X_train_d, y_train)
 p_train = model_forest.predict(X_train_d)
 p_test = model_forest.predict(X_test_d)
+
+accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
+roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
+
+print(accuracy)
+print(roc_auc)
+
+model_bayes = GaussianNB()
+model_bayes.fit(X_train_d, y_train)
+p_train = model_bayes.predict(X_train_d)
+p_test = model_bayes.predict(X_test_d)
+
+accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
+roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
+
+print(accuracy)
+print(roc_auc)
+
+params = {
+    'boost_from_average': 'false',
+    'boost': 'gbdt',
+    'feature_fraction': 0.04,
+    'learning_rate': 0.0085,
+    'max_depth': 50,
+    'metric': 'auc',
+    'min_data_in_leaf': 3,
+    'min_sum_hessian_in_leaf': 10,
+    'num_leaves': 13,
+    'num_threads': 8,
+    'tree_learner': 'serial',
+    'objective': 'binary'
+}
+
+to_train = lgb.Dataset(X_train_d, y_train)
+to_val = lgb.Dataset(X_test_d, y_test)
+model_lgb = lgb.train(params, to_train, valid_sets=[to_train, to_val], num_boost_round=1000000, verbose_eval=5000,
+                  early_stopping_rounds=2000)
+p_train = model_bayes.predict(X_train_d)
+p_test = model_bayes.predict(X_test_d)
 
 accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
 roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
