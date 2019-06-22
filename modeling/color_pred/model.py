@@ -42,23 +42,28 @@ X_test_d = tfidf.transform(X_test_d)
 # X_train_d = pca.transform(X_train_d.toarray())
 # X_test_d = pca.transform(X_test_d.toarray())
 
+# model_perceptron = Perceptron(max_iter=200,
+#                               penalty=None,
+#                               early_stopping=True,
+#                               validation_fraction=0.05,
+#                               random_state=228)
+# model_perceptron.fit(X_train_d, y_train)
+# p_train = model_perceptron.predict(X_train_d)
+# p_test = model_perceptron.predict(X_test_d)
+#
+# accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
+# roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
+#
+# print(accuracy)
+# print(roc_auc)
 
-model_perceptron = Perceptron(max_iter=200,
-                              penalty=None,
-                              early_stopping=True,
-                              validation_fraction=0.05,
-                              random_state=228)
-model_perceptron.fit(X_train_d, y_train)
-p_train = model_perceptron.predict(X_train_d)
-p_test = model_perceptron.predict(X_test_d)
 
-accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
-roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
-
-print(accuracy)
-print(roc_auc)
-
-model_logit = LogisticRegression(random_state=228)
+model_logit = LogisticRegression(penalty='l1',
+                                 solver='liblinear',
+                                 C=1,
+                                 tol=1e-3,
+                                 max_iter=100,
+                                 random_state=228)
 model_logit.fit(X_train_d, y_train)
 p_train = model_logit.predict(X_train_d)
 p_test = model_logit.predict(X_test_d)
@@ -68,6 +73,7 @@ roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
 
 print(accuracy)
 print(roc_auc)
+
 
 model_forest = RandomForestClassifier(100, random_state=228)
 model_forest.fit(X_train_d, y_train)
