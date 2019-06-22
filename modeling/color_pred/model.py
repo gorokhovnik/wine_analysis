@@ -107,18 +107,23 @@ params = {
     'objective': 'binary'
 }
 
-# to_train = lgb.Dataset(X_train_d.values, y_train.values)
-# to_val = lgb.Dataset(X_test_d.values, y_test.values)
-# model_lgb = lgb.train(params, to_train, valid_sets=[to_train, to_val], num_boost_round=1000, verbose_eval=100)
-# p_train = model_lgb.predict(X_train_d)
-# p_test = model_lgb.predict(X_test_d)
+to_train = lgb.Dataset(X_train_d, y_train)
+to_val = lgb.Dataset(X_test_d, y_test)
+model_lgb = lgb.train(params, to_train, valid_sets=[to_train, to_val], num_boost_round=1000, verbose_eval=1)
+p_train = model_lgb.predict(X_train_d)
+p_test = model_lgb.predict(X_test_d)
 
-model_boost = XGBClassifier(5, 0.05, 10, 0, random_state=228)
-model_boost.fit(X_train_d, y_train)
-p_train = model_boost.predict(X_train_d)
-p_test = model_boost.predict(X_test_d)
+# model_boost = XGBClassifier(max_depth=50,
+#                             learning_rate=0.2,
+#                             n_estimators=50,
+#                             reg_alpha=5,
+#                             reg_lambda=5,
+#                             random_state=228)
+# model_boost.fit(X_train_d, y_train)
+# p_train = model_boost.predict(X_train_d)
+# p_test = model_boost.predict(X_test_d)
 
-accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
+# accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
 roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
 
 print(accuracy)
