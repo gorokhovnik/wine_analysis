@@ -22,8 +22,8 @@ wine = RS(wine)
 wine_summary = pd.read_csv('../../wine_summary.csv')
 wine_summary.set_index('id', inplace=True)
 
-X_d, X_f, y,\
-X_train_d, X_train_f, y_train,\
+X_d, X_f, y, \
+X_train_d, X_train_f, y_train, \
 X_test_d, X_test_f, y_test = split(wine, 'description', ['country', 'continent', 'price', 'category', 'year'], 'color')
 
 accuracy = []
@@ -58,33 +58,38 @@ X_test_d = tfidf.transform(X_test_d)
 # print(roc_auc)
 
 
-model_logit = LogisticRegression(penalty='l1',
-                                 solver='liblinear',
-                                 C=1,
-                                 tol=1e-3,
-                                 max_iter=100,
-                                 random_state=228)
-model_logit.fit(X_train_d, y_train)
-p_train = model_logit.predict(X_train_d)
-p_test = model_logit.predict(X_test_d)
+# model_logit = LogisticRegression(penalty='l1',
+#                                  solver='liblinear',
+#                                  C=1,
+#                                  tol=1e-3,
+#                                  max_iter=100,
+#                                  random_state=228)
+# model_logit.fit(X_train_d, y_train)
+# p_train = model_logit.predict(X_train_d)
+# p_test = model_logit.predict(X_test_d)
+#
+# accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
+# roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
+#
+# print(accuracy)
+# print(roc_auc)
 
-accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
-roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
 
-print(accuracy)
-print(roc_auc)
-
-
-model_forest = RandomForestClassifier(100, random_state=228)
-model_forest.fit(X_train_d, y_train)
-p_train = model_forest.predict(X_train_d)
-p_test = model_forest.predict(X_test_d)
-
-accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
-roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
-
-print(accuracy)
-print(roc_auc)
+# model_forest = RandomForestClassifier(n_estimators=100,
+#                                       oob_score=True,
+#                                       max_depth=100,
+#                                       min_samples_leaf=1,
+#                                       verbose=1,
+#                                       random_state=228)
+# model_forest.fit(X_train_d, y_train)
+# p_train = model_forest.predict(X_train_d)
+# p_test = model_forest.predict(X_test_d)
+#
+# accuracy += [[accuracy_score(y_train, p_train), accuracy_score(y_test, p_test)]]
+# roc_auc += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
+#
+# print(accuracy)
+# print(roc_auc)
 
 params = {
     'max_bin': 7,
