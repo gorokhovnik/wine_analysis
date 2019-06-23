@@ -12,7 +12,6 @@ wine = pd.read_csv('../../wine.csv')
 
 wine = FE(wine, 500)
 wine = RS(wine)
-wine['color'] = wine['color'].map({'red': 0, 'white': 1})
 
 wine_summary = pd.read_csv('../../wine_summary.csv')
 wine_summary.set_index('id', inplace=True)
@@ -30,6 +29,7 @@ X_test, X_test_d, X_test_f, y_test = split(wine=wine,
                                            description='description',
                                            features=['country', 'continent', 'price', 'category', 'color', 'year'],
                                            y='points',
+                                           test_size=0.5,
                                            tfidf=tfidf)
 
 MAEs = []

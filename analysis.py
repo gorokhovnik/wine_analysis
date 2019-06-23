@@ -42,7 +42,7 @@ for color in ['red', 'white']:
 print()
 wine_summary['points_to_price'] = wine['points_to_price']
 
-print('Лучшие цены при изменении оценки по формуле new_points = (points – 80)**2:\n')
+print('Лучшие цена / оценка при изменении оценки по формуле new_points = (points – 80)**2:\n')
 wine['points_to_price'] = (wine['points'] - 80) ** 2 / wine['price']
 print('|||||\n|---|---|---|---|')
 for color in ['red', 'white']:

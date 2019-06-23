@@ -33,6 +33,7 @@ X_test, X_test_d, X_test_f, y_test = split(wine=wine,
                                            description='description',
                                            features=['country', 'continent', 'price', 'category', 'year'],
                                            y='color',
+                                           test_size=0.5,
                                            tfidf=tfidf)
 
 AUCs = []
@@ -217,3 +218,20 @@ AUCs += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
 
 print(AUCs)
 model_lgb.save_model('full')
+
+from sklearn.metrics import roc_curve
+from matplotlib import pyplot as plt
+fpr, tpr, thresholds = roc_curve(y_train, p_train)
+# plot no skill
+plt.plot([0, 1], [0, 1], linestyle='--')
+# plot the roc curve for the model
+plt.plot(fpr, tpr, marker='.')
+# show the plot
+plt.show()
+fpr, tpr, thresholds = roc_curve(y_test, p_test)
+# plot no skill
+plt.plot([0, 1], [0, 1], linestyle='--')
+# plot the roc curve for the model
+plt.plot(fpr, tpr, marker='.')
+# show the plot
+plt.show()
