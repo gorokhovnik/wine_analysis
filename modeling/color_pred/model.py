@@ -10,7 +10,7 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 import lightgbm as lgb
-from sklearn.metrics import roc_auc_score, accuracy_score
+from sklearn.metrics import roc_auc_score
 
 from FE import FE
 from RS import RS
@@ -20,11 +20,6 @@ wine = pd.read_csv('../../wine.csv')
 
 wine = FE(wine, 500)
 wine = RS(wine)
-wine['color'] = wine['color'].map({'red': 0, 'white': 1})
-
-wine_summary = pd.read_csv('../../wine_summary.csv')
-wine_summary.set_index('id', inplace=True)
-
 
 tfidf = TfidfVectorizer(min_df=20,
                         ngram_range=(1, 1),
@@ -96,7 +91,6 @@ params = {
     'lambda_l2': 0,
     'tree_learner': 'serial',
     'objective': 'binary'
-
 }
 
 to_train = lgb.Dataset(X_train_d, y_train)

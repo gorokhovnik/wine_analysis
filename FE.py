@@ -1500,8 +1500,9 @@ def FE(wine, country_cutoff=1000):
     wine['country'] = np.where(wine['country'].str.contains('|'.join(popular_countries)), wine['country'], 'Other')
     wine['color'] = np.where(wine['variety'].str.contains('|'.join(rose)), 'rose',
                              np.where(wine['variety'].str.contains('|'.join(red)), 'red', 'white'))
-    wine['category'] = np.where(wine['price'] <= 15, 1,
-                                np.where(wine['price'] <= 30, 2,
-                                         np.where(wine['price'] <= 50, 3, 4)))
+    wine['color'] = wine['color'].map({'red': 0, 'white': 1})
+    wine['category'] = np.where(wine['price'] <= 15, 0,
+                                np.where(wine['price'] <= 30, 1,
+                                         np.where(wine['price'] <= 50, 2, 3)))
     print('dim after feature engineering:', wine.shape)
     return wine
