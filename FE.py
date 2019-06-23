@@ -1489,6 +1489,7 @@ rose = ['Agdam Gyzyl Uzumu', 'Agdam gyzyl izyum', 'Agdam gyzyl uzumu', 'Agdam qi
 def FE(wine, country_cutoff=1000):
     wine.set_index('id', inplace=True)
     wine['year'] = wine['title'].str.extract(r'([1-9][0-9][0-9][0-9])')
+    wine['year'] = wine['year'].astype('float64')
     wine['continent'] = np.where(wine['country'].str.contains('|'.join(europe)), 'europe',
                                  np.where(wine['country'].str.contains('|'.join(asia)), 'asia',
                                           np.where(wine['country'].str.contains('|'.join(africa)), 'africa',
