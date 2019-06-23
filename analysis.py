@@ -21,8 +21,8 @@ print('\n')
 '''цена/качество'''
 print('Лучшие вина:\n')
 print('|||||\n|---|---|---|---|')
-for color in ['red', 'white']:
-    for category in range(1, 5):
+for color in range(2):
+    for category in range(4):
         idx = wine[(wine['category'] == category) & (wine['color'] == color)]['points'].argmax()
         print('|' + wine.loc[idx]['title'] + ' ' + str(wine.loc[idx]['price']) + '$ ' + str(
             wine.loc[idx]['points']) + 'p', end='')
