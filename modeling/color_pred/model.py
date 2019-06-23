@@ -78,8 +78,7 @@ AUCs = []
 #
 # print(AUCs)
 
-print('lgb on text')
-
+print('lgb on description')
 params = {
     'max_bin': 7,
     'boost_from_average': 'false',
@@ -114,8 +113,8 @@ p_test_d = model_lgb.predict(X_test_d)
 AUCs += [[roc_auc_score(y_train, p_train_d), roc_auc_score(y_test, p_test_d)]]
 
 print(AUCs)
+model_lgb.save_model('description')
 
-print('lgb on feat')
 
 # pca = PCA(n_components=1000,
 #           random_state=228)
@@ -152,6 +151,8 @@ print('lgb on feat')
 #
 # print(AUCs)
 
+
+print('lgb on feat')
 params = {
     'max_bin': 255,
     'boost_from_average': 'false',
@@ -185,19 +186,40 @@ p_test_f = model_lgb.predict(X_test_f)
 AUCs += [[roc_auc_score(y_train, p_train_f), roc_auc_score(y_test, p_test_f)]]
 
 print(AUCs)
+model_lgb.save_model('feat')
 
-X_train_df = pd.DataFrame({'d': p_train_d,
-                           'f': p_train_f})
-X_test_df = pd.DataFrame({'d': p_test_d,
-                          'f': p_test_f})
-print(X_train_df)
+print('lgb on full')
+params = {
+    'max_bin': 127,
+    'boost_from_average': 'false',
+    'boost': 'gbdt',
+    'feature_fraction': 0.85,
+    'bagging_fraction': 0.8,
+    'learning_rate': 0.05,
+    'max_depth': 25,
+    'metric': 'auc',
+    'min_data_in_leaf': 1,
+    'min_sum_hessian_in_leaf': 0,
+    'num_leaves': 101,
+    'num_threads': 8,
+    'lambda_l1': 0,
+    'lambda_l2': 0,
+    'tree_learner': 'serial',
+    'objective': 'binary'
+}
 
-model_logit = LogisticRegression()
-model_logit.fit(X_train_df, y_train)
-p_train = model_logit.predict_proba(X_train_df)[:, 1]
-p_test = model_logit.predict_proba(X_test_df)[:, 1]
-
+to_train = lgb.Dataset(X_train, y_train)
+to_val = lgb.Dataset(X_test, y_test)
+model_lgb = lgb.train(params,
+                      to_train,
+                      valid_sets=[to_train, to_val],
+                      num_boost_round=10000,
+                      verbose_eval=100,
+                      early_stopping_rounds=100)
+p_train = model_lgb.predict(X_train)
+p_test = model_lgb.predict(X_test)
 
 AUCs += [[roc_auc_score(y_train, p_train), roc_auc_score(y_test, p_test)]]
 
 print(AUCs)
+model_lgb.save_model('full')
